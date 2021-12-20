@@ -1,189 +1,137 @@
-# Hamilton <!-- omit in toc -->
+# hexo-theme-gal
 
-A minimal and beautiful Jekyll theme best for writing and note-taking.
+# 前言
 
-The original purpose of this theme is to be a replacement of the default Jekyll theme -- [Minima](https://github.com/jekyll/minima). Hamilton is an enhancement of Minima but still, keep in minimal.
+当我刚刚成为一名gal的萌新时, 忧郁的弟弟已经结婚了(恭喜弟弟君)
 
-Please check out the [demo](https://ngzhio.github.io/jekyll-theme-hamilton/).
+弟弟站点的主题感觉挺好看的, 不过是wordpress的主题, 在弟弟的站点也看出很多人喜欢这个站点, 甚至有挺多人在问如何做出这种站点
 
-| Skins | Displays |
-| ----- | -------- |
-| Daylight | ![screenshot](screenshot.png) |
-| Sunrise/Sunset | ![screenshot](screenshot-sunrise.png) |
-| Midnight | ![screenshot](screenshot-midnight.png) |
+正好我注册了个新的blog域名, 要重新弄个hexo博客(太久没写过博文了), 而又不想用其他主题, 又听贴吧说弟弟站点好像要关了
 
-## Features <!-- omit in toc -->
+于是乎就有了这次的hexo移植版, 还原度不说100%(也不可能), 也有90%了(毕竟hexo跟wordpress是两个不同的东西)
 
-- [Jekyll SEO Tag](https://github.com/jekyll/jekyll-seo-tag)
-- [Jekyll Feed](https://github.com/jekyll/jekyll-feed)
-- [Jekyll Sitemap](https://github.com/jekyll/jekyll-sitemap)
-- [Google Analytics](https://analytics.google.com/)
-- [MathJax](https://www.mathjax.org/)
-- [Disqus](https://disqus.com/)
-- [Font Awesome](https://fontawesome.com/)
-- TOC
-- Customizable head
-- Configurable page navigation
-- Customizable styles and skins
-- Archive pages implemented in pure Liquid
+下面的**配置说明**一定要先做好, 因为包含了主题的依赖(反正很重要就是了)
 
-## Table of Contents <!-- omit in toc -->
+主题示例博客:[myau.moe](https://myau.moe)
+    
+# 更新: 2018/3/4
 
-- [Installation](#installation)
-- [Configuration](#configuration)
-  - [Optional Parameters](#optional-parameters)
-- [Archive Pages](#archive-pages)
-- [MathJax](#mathjax)
-- [TOC](#toc)
-- [Customization](#customization)
-  - [Metadata](#metadata)
-  - [Navigation](#navigation)
-  - [Social Media](#social-media)
-  - [Skins](#skins)
-  - [More Customized Styles](#more-customized-styles)
-- [License](#license)
+有个小小的建议, 这个主体可能需要配置比较多的图片, 图片比如好几百kb甚至上m的加载会慢, 这点可以用一些网站进行图片压缩, 然后把图片放在一些对象存储空间上(比如七牛的对象存储空间),
+比如我的博客[myau.moe](https://myau.moe)就是这样的, 所以加载会快些, 关于图片压缩, 可以用下面几个网站:
 
-## Installation
+### [TinyPng](https://tinypng.com/)
+### [CloudConvert](https://cloudconvert.com/)
 
-You can choose one of the following methods to install Hamilton:
+另外, 给大家推荐一个网站, 我个人觉得挺好用的, 有很多功能
 
-- Directly specify the `jekyll-theme-hamilton` gem.
+### [创造师](http://chuangzaoshi.com/)     
 
-    1. Add `gem 'jekyll-theme-hamilton'` into your `Gemfile`.
-    2. Add the below lines into your `_config.yml`.
+# 更新: 2018/3/30
 
-        ```yml
-        plugins:
-          - jekyll-theme-hamilton
-        ```
+参照gitment项目的这个[issue](https://github.com/imsun/gitment/issues/118)将gitment的id定为了文章的具体时间(主要是因为github issue label有长度限制, 如果文章标题采用了中文进行了url编码很容易超出限制导致初始化失败, 出现Validation Failed)
 
-- If your site is hosted on GitHub Pages, you can use [`jekyll-remote-theme`](https://github.com/benbalter/jekyll-remote-theme) to import the master branch of Hamilton.
+# 配置说明
 
-    1. Add `gem 'jekyll-remote-theme'` into your `Gemfile`.
-    2. Add the below lines into your `_config.yml`.
+    git clone https://github.com/ZEROKISEKI/hexo-theme-gal.git themes/gal
+    
+    or 
+    
+    git clone https://github.com/ZEROKISEKI/hexo-theme-gal.git themes/gal --depth 1
 
-        ```yml
-        plugins:
-          - jekyll-remote-theme
+## 使用该主题前要安装的东西:
 
-        remote_theme: ngzhio/jekyll-theme-hamilton
-        ```
+    更改主题为: gal
 
-## Configuration
+    在你的hexo站点目录(非主题目录)下安装 hexo-renderer-sass 和 hexo-renderer-scss
+    
+    npm install hexo-renderer-sass --save 
+    
+    npm install hexo-renderer-scss --save
+    
+    or 
+    
+    cnpm install hexo-renderer-sass --save
+    
+    cnpm install hexo-renderer-scss --save
+    
+    or 
+    
+    yarn add hexo-renderer-sass(推荐)
+    
+    yarn add hexo-renderer-scss(推荐)
+    
+    
+    上面的一步是将.scss样式文件渲染成最后的style.css文件
+    
+    然后, 在你的hexo站点目录下安装 hexo-generator-json-content
+    
+    npm install hexo-generator-json-content --save
+    
+    or 
+    
+    cnpm install hexo-generator-json-content --save
+    
+    如果后面你hexo g的时候有问题, 注意看看是不是这个json-content的问题, 如果是的话就是你的node比较老
+    
+    接着在hexo站点目录的_config.yml下进行配置:
+    
+    jsonContent:
+      dateFormat: MM-DD
+      pages:
+        title: true
+        text: true
+        path: true
+        date: true
+        excerpt: true
+        preview: true
+      posts:
+        title: true
+        text: true
+        path: true
+        date: true
+        excerpt: true
+        tags: [{
+          name: tag.name,
+          slug: tag.slug,
+          permalink: tag.permalink
+        }]
+        preview: true
+    
+    接着, 进行下面的步骤:
+    
+    hexo new page "search"              // 搜索功能的必须步骤
+    hexo new page "404"                 // 开启404页面
+    
+    至于tags和categories页面的设置, 百度或google就有对应的方法了, 这里就不多说了
+    
+    对了, hexo站点目录的_config.yml的title, description, author和url要自己正确配置
+    
+## 主题的配置说明:
 
-After installation, you can run `jekyll serve` to check out your site, but before that, *make sure* the below **required parameters** are configured in your `_config.yml`.
+主题配置说明在[wiki](https://github.com/ZEROKISEKI/hexo-theme-gal/wiki/%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
 
-| Parameters | Types | Specifications |
-|:---------- |:----- |:-------------- |
-| `title`    | string | The site title |
-| `disqus`   | string | The Disqus shortname; Unless you don't want to enable the comments system, you must specify this parameter. It is used in the production environment. |
-| `google_analytics` | string | The Google Analytics tracking ID; It is used in the production environment. |
+更新：新开了一个issue，主题的一些新的配置说明将会写在这个issue上。 [issue #46](https://github.com/ZEROKISEKI/hexo-theme-gal/issues/46)
 
-### Optional Parameters
+## 使用建议:
 
-| Parameters | Types | Specifications |
-|:---------- |:----- |:-------------- |
-| `author`   | string | The name of the author of the site; It would be showed in the copyright statement. |
-| `avatar`   | string | The avatar of the author of the site. |
-| `email`    | string | The email of the author of the site. |
-| `location` | string | The current living location of the author of the site. |
-| `skin`     | string | The skin name. See more information on the [Customization](#customization) section. |
-| `lang`     | string | The language of the site; The default value is `en`. |
-| `paginate` | int    | The number of posts on each page. |
-| `date_format` | string | The date format; The default value is `%b %-d, %Y`. |
-| `subscribe` | boolean | Show the subsribe feed button. |
+    1. 建议每一篇文章都要在front-matter设置preview图片地址, 这个地址是url地址(本地的也要写完整的url)
+    2. 每一篇文章的excerpt部分(即<!--more-->之前的部分)是纯文本而不要是markdown
+    3. 作为背景用的图片大小都应该差不多, 比如示例用的几张背景图片都是1920 * 1080那样的
+    4. 使用gitment作为评论系统, 在新发布文章时要去对应文章页面下点击初始化评论系统按钮(需登录)
+    5. 可以设置置顶文章, 需要在front-matter设置top: true, 设置置顶文章最好只设置一篇
 
-## Archive Pages
+# 吐槽 && 痛点:
 
-Hamilton implements some archive templates in pure Liquid. For example, if you want to create a category archive page, set the below parameters on that page:
+hexo只能采用第三方的评论系统, 要达到还原主题的评论效果, 目前只有gitment符合要求, 但是github issue没有那种一层一层回复的效果, 所以回复评论上只能采用**@**的方式
 
-```yml
----
-layout: archive-taxonomies
-type: categories
----
-```
+挺多hexo主题的搜索功能是直接链接到搜索引擎的site或者出现搜索框ajax出现搜索内容, 主题的搜索功能为了尽可能达到完全一致, 采用的方法并不是很妥当(用了带url参数的方式), 不过静态博客系统应该问题不大(也没什么东西可以被打):grin:
 
-Or a tag archive page:
+原主题采用了shortcode(短代码), 比如说`[warning]blablabla[/waring]`是对应解析成警告框的, 这点在hexo上可以实现, 但是这样就要求hexo用户也知道对应的规则, 不是很好, 所以在文章的markdown解析样式上是参照了其他一些主题的样式, 这点我无法做到完全的还原:disappointed:, 如果有人可以的话, 也可以做一下这个功能, 不过要对zanblog的解析规则了解才好
 
-```yml
-layout: archive-taxonomies
-type: tags
-```
+侧边栏标签云那里的字体随机大小, wordpress 直接有个方法`change_tag_cloud_font_sizes()`, 直接设定最大最小就行了, 每次刷新页面都是固定的值, 我用hexo取随机值每次都会变大小, 这点以后再改好些吧
 
-Or archive by years:
+反正近期有空的话就继续做
 
-```yml
-layout: archive-years
-```
 
-## MathJax
 
-You can enable MathJax on each post or page, just set `math: true` on that page.
 
-## TOC
-
-If you want to show the Table of Contents of a post or page on the left sidebar, just set `toc: true` on that page.
-
-## Customization
-
-### Metadata
-
-You can create a file `_includes/custom-head.html` in your repository, and add any metadata into that page, e.g. favicons.
-
-### Navigation
-
-You can create a file `_data/navigation.yml` to configure links to some pages. For example,
-
-```yml
-- title: About
-  url: /about/
-- title: Categories
-  url: /categories/
-- title: Tags
-  url: /tags/
-```
-
-The navigation bar also supports dropdown submenus:
-
-```yml
-- title: About
-  url: /about/
-- title: Categories
-  url: /categories/
-- title: Tags
-  url: /tags/
-- title: More
-  sublinks:
-    - title: FAQ
-      url: /faq/
-    - title: Docs
-      url: /docs/
-```
-
-### Social Media
-
-You can create a file `_data/social.yml` to configure links to your social media. For example,
-
-```yml
-- title: Twitter
-  url: https://twitter.com/ngzhio
-  icon: fab fa-twitter
-- title: GitHub
-  url: https://github.com/ngzhio/jekyll-theme-hamilton
-  icon: fab fa-github
-```
-
-### Skins
-
-You can select a skin by setting `skin` in `_config.yml`. The built-in skins include `daylight`, `midnight`, `sunrise`, and `sunset`. If you don't specify any skin, Hamilton would dynamically select one in these built-in skins according to different hours in a day.
-
-You can also customize a new skin, for example, a skin called `solarized`. You need to copy [`_sass/hamilton/skins/daylight.scss`](_sass/hamilton/skins/daylight.scss) into your repository and then rename it to `solarized.scss`, and adjust some colors in that file. Finally, specify `skin: solarized` in `_config.yml`.
-
-### More Customized Styles
-
-If you want to create more CSS styles in your site, creating a file `_sass/hamilton/custom-styles.scss`, and putting your code in there, Hamilton would automatically refer to them.
-
-## License
-
-The theme is available as open source under the terms of the [MIT License](LICENSE.txt).
